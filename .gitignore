@@ -1,0 +1,18 @@
+# Excel / Office temp and lock files
+~$*
+*.tmp
+*.bak
+
+# macOS
+.DS_Store
+
+# Windows
+Thumbs.db
+Desktop.ini
+
+# Editor / IDE
+.vscode/
+.idea/
+
+# OneDrive sync artifacts
+*.lnk
