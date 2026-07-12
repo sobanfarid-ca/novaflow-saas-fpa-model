@@ -9,7 +9,7 @@ A few things I focused on:
 - A one-directional dependency spine with no circular references. Scenario Manager feeds Assumptions, which feed Revenue, Headcount, and OpEx, which roll into the P&L, then Cash Flow, then the KPI dashboard.
 - SaaS-correct mechanics: separate customer and MRR roll-forwards per segment, and a real split between billings, recognised revenue, and deferred revenue. Enterprise bills annually upfront, so cash and P&L genuinely diverge.
 - A self-checking tie-out panel. Revenue, payroll, cash, and the ARR waterfall all have to reconcile before I'd call it done.
-- The metrics an investor actually asks about: NRR, GRR, CAC, LTV, CAC payback, Magic Number, and Rule of 40, all live on the dashboard.
+- An executive dashboard designed like an internal board report, not a spreadsheet dump: a three-band KPI hierarchy, a colour-coded scenario chip, a status bar, and five clean charts. The metrics an investor actually asks about (NRR, GRR, CAC, LTV, CAC payback, Magic Number, Rule of 40) sit up top and recolour the moment you flip the scenario.
 
 The plan takes ARR from about $4m to $15m while EBITDA margin climbs out of the deep negatives, funded by an $18m Series B. All figures are illustrative.
 

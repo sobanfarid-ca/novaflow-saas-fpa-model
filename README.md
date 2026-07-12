@@ -4,7 +4,7 @@ A fully formula-driven, scenario-controlled operating model for a fictional B2B 
 
 ![Executive KPI Dashboard](assets/kpi-dashboard.png)
 
-At a glance: one dropdown flips the entire model across Base / Optimistic / Downside. The dashboard above recalculates live from the calculation spine below it: revenue and MRR roll-forwards, a formula-driven headcount and payroll build, a monthly P&L with NOL-adjusted tax, and an indirect cash flow with runway. No circular references, no hardcoded outputs.
+At a glance: one dropdown flips the entire model across Base / Optimistic / Downside, and a colour-coded chip plus status bar keep the active scenario, forecast period and refresh context visible at all times. The dashboard above recalculates live from the calculation spine below it: revenue and MRR roll-forwards, a formula-driven headcount and payroll build, a monthly P&L with NOL-adjusted tax, and an indirect cash flow with runway. No circular references, no hardcoded outputs.
 
 ## The business
 
@@ -25,7 +25,7 @@ Scenario Manager -> Assumptions -> Revenue | Headcount | OpEx
 - **Operating Expenses**: COGS (hosting % of revenue + support share of Customer Success), S&M, R&D, G&A, plus a capex placeholder and straight-line depreciation that V2 replaces.
 - **Income Statement**: monthly P&L with FY2026-FY2028 rollups and an NOL carryforward (tax charged only on cumulative positive pre-tax income).
 - **Cash Flow**: indirect method (NI + D&A + deferred revenue movement - capex), cash roll-forward, trailing three-month burn and guarded runway. Labelled placeholder lines mean V2 working capital and financing slot in without rework.
-- **KPI Dashboard**: executive cards (ARR, MRR, margins, cash, burn, runway, headcount), SaaS efficiency metrics (NRR, GRR, CAC, LTV, LTV/CAC, CAC payback, Magic Number, Rule of 40), five custom-styled charts including an ARR waterfall, and traffic-light conditional formatting.
+- **KPI Dashboard**: an executive one-pager organised into three bands (Financial Performance, Growth & Liquidity, SaaS Efficiency) behind a status bar and a colour-coded scenario chip. Headline cards cover revenue, ARR, cash, gross and EBITDA margin, net income, MRR, revenue growth, burn, runway and Rule of 40; the efficiency band covers NRR, GRR, CAC, LTV, LTV/CAC, CAC payback and Magic Number. Five brand-styled charts (ARR trajectory, cash balance, EBITDA-margin bridge, headcount by department, ARR growth waterfall) and traffic-light conditional formatting sit beneath the cards.
 
 ## Conventions
 
@@ -45,9 +45,26 @@ Fonts: Aptos Display / Aptos / Aptos Narrow / Bahnschrift SemiBold, with Arial f
 
 Open `NovaFlow_Analytics_FPA_Model_v1.xlsx` in **Excel 2021 or Microsoft 365** (XLOOKUP is required; older versions and most alternative spreadsheet apps will not recalculate correctly). Start on the **Instructions** sheet for the reading guide, colour legend, and checks panel. To run a scenario, go to **Scenario Manager**, change the single control cell to Base / Optimistic / Downside, and the whole model recalculates. Blue-on-cream cells are the only inputs meant to be edited.
 
+## Key features
+
+- **Single-switch scenario engine.** Ten levers across Base / Optimistic / Downside, one data-validated control cell, propagated through named ranges with no circular references.
+- **SaaS-correct revenue mechanics.** Per-segment customer and MRR roll-forwards, ARPU compounding, and an explicit billings / recognised-revenue / deferred-revenue split, so cash and P&L diverge the way they do in a real annual-billing SaaS.
+- **Driver-based headcount and payroll.** A departmental hiring plan scaled by scenario pace, January salary inflation, and a fully loaded cost factor, feeding OpEx entirely by formula.
+- **NOL-aware tax and guarded runway.** Tax charged only on cumulative positive pre-tax income; runway floored and flagged when it falls below the threshold.
+- **Executive dashboard.** A three-band KPI hierarchy, colour-coded scenario chip, status bar, five brand-styled charts, and traffic-light conditional formatting on the metrics that matter.
+- **Self-checking.** A six-line tie-out panel (scenario validity, revenue, payroll, cash, ARR waterfall, tax sign) that must read all OK before the model is trusted.
+
+## Key assumptions
+
+All assumptions live in blue-on-cream input cells on the Assumptions and Scenario Manager sheets and can be changed without touching a formula. The Professional tier is priced around $850/mo billed monthly with higher churn; Enterprise is around $4,500/mo billed annually upfront with NRR near 106%. New-logo adds ramp steadily, ARPU compounds at roughly 4%/yr, and hiring follows a departmental plan with salary inflation applied each January. The plan is funded by an $18m Series B, and tax applies only once cumulative pre-tax income turns positive. All figures are illustrative.
+
 ## What this demonstrates
 
 An end-to-end SaaS operating model built the way a lender or investor would expect to receive it: a one-directional dependency spine with no circular references, a single scenario switch driving every downstream sheet through named ranges, SaaS-correct separation of billings, recognised revenue and deferred revenue, and a self-checking tie-out panel. It is intended as a portfolio piece showing FP&A modelling, Excel engineering, and SaaS metric fluency (NRR, GRR, CAC, LTV, CAC payback, Magic Number, Rule of 40).
+
+## What I learned
+
+Building this end to end sharpened a few things. Separating billings from recognised revenue from deferred revenue is where SaaS models earn their keep: getting the Enterprise annual-upfront mechanic right is what makes cash and P&L tell different, and correct, stories. Enforcing a one-directional dependency spine up front, rather than patching circular references later, kept the model auditable and made the scenario switch trivial to wire through named ranges. A self-checking tie-out panel turned "I think it balances" into "it reads OK or it doesn't", which is the difference between a spreadsheet and a model I would hand to an investor. If I were starting over, I would build the Balance Sheet and working-capital schedule from day one rather than leaving them to V2.
 
 ## License
 
@@ -55,4 +72,4 @@ Released under the [MIT License](LICENSE). All figures are illustrative and for 
 
 ## Author
 
-**Soban Farid** — built as an FP&A portfolio project. Feedback and questions welcome via GitHub issues.
+**Soban Farid.** Built as an FP&A portfolio project. Feedback and questions welcome via GitHub issues.
