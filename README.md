@@ -6,6 +6,19 @@ A fully formula-driven, scenario-controlled operating model for a fictional B2B 
 
 At a glance: one dropdown flips the entire model across Base / Optimistic / Downside, and a colour-coded chip plus status bar keep the active scenario, forecast period and refresh context visible at all times. The dashboard above recalculates live from the calculation spine below it: revenue and MRR roll-forwards, a formula-driven headcount and payroll build, a monthly P&L with NOL-adjusted tax, and an indirect cash flow with runway. No circular references, no hardcoded outputs.
 
+> **Disclaimer:** This project was built for portfolio purposes. NovaFlow Analytics is a fictional company, and all assumptions and financial figures are illustrative. Nothing here is financial advice.
+
+## Tech stack
+
+- **Microsoft Excel (2021 / Microsoft 365)** as the modelling engine
+- **Dynamic array and lookup functions** (XLOOKUP, IFERROR, TEXT) for a spill-free, auditable build
+- **Named ranges** to propagate the scenario switch across sheets
+- **Data validation** for the single scenario control cell
+- **Conditional formatting** for the colour-coded scenario chip and traffic-light KPIs
+- **Native Excel charts** styled to a consistent brand palette
+
+Techniques: driver-based forecasting, scenario analysis, SaaS revenue recognition (billings vs recognised vs deferred), roll-forward schedules, NOL carryforward, and a self-checking tie-out panel.
+
 ## The business
 
 NovaFlow Analytics sells workflow-analytics subscriptions to operations and finance teams running high-volume digital processes. Two tiers map to two segments: **Professional** (mid-market, ~$850/mo, billed monthly, inside-sales motion, higher churn) and **Enterprise** (~$4,500/mo, billed annually upfront, field-led, lower churn, expansion-driven). The plan takes ARR from ~$4m to ~$15m while EBITDA margin improves from roughly -65% to the high minus-teens, funded by an $18m Series B. Enterprise NRR runs ~106%; blended NRR approaches 100% as the Enterprise mix builds.
@@ -26,6 +39,16 @@ Scenario Manager -> Assumptions -> Revenue | Headcount | OpEx
 - **Income Statement**: monthly P&L with FY2026-FY2028 rollups and an NOL carryforward (tax charged only on cumulative positive pre-tax income).
 - **Cash Flow**: indirect method (NI + D&A + deferred revenue movement - capex), cash roll-forward, trailing three-month burn and guarded runway. Labelled placeholder lines mean V2 working capital and financing slot in without rework.
 - **KPI Dashboard**: an executive one-pager organised into three bands (Financial Performance, Growth & Liquidity, SaaS Efficiency) behind a status bar and a colour-coded scenario chip. Headline cards cover revenue, ARR, cash, gross and EBITDA margin, net income, MRR, revenue growth, burn, runway and Rule of 40; the efficiency band covers NRR, GRR, CAC, LTV, LTV/CAC, CAC payback and Magic Number. Five brand-styled charts (ARR trajectory, cash balance, EBITDA-margin bridge, headcount by department, ARR growth waterfall) and traffic-light conditional formatting sit beneath the cards.
+
+## A look inside
+
+**Scenario Manager** drives the entire model from one control cell. Ten levers are defined for Base, Optimistic and Downside; a data-validated dropdown selects the case, and a Live column (read by every downstream sheet through named ranges) resolves the active values.
+
+![Scenario Manager](assets/scenario-manager.png)
+
+**Revenue Model** runs customer and MRR roll-forwards per segment (opening + new + expansion - churn), then splits billings from recognised revenue and tracks the deferred-revenue movement that feeds the Cash Flow. This is the SaaS-specific mechanism that separates cash from P&L.
+
+![Revenue Model](assets/revenue-model.png)
 
 ## Conventions
 
@@ -72,4 +95,18 @@ Released under the [MIT License](LICENSE). All figures are illustrative and for 
 
 ## Author
 
-**Soban Farid.** Built as an FP&A portfolio project. Feedback and questions welcome via GitHub issues.
+**Soban Farid**, Chartered Accountant (ICAP) with experience in audit, financial reporting, and financial modelling. This project was built to deepen expertise in FP&A and driver-based planning. Feedback and questions welcome via GitHub issues.
+
+## Version history
+
+**v1.0** (current)
+
+- Initial public release
+- Driver-based, scenario-controlled SaaS operating model (36-month engine, 10 sheets)
+- Executive KPI dashboard with three-band hierarchy, scenario chip and five charts
+- Self-checking tie-out panel
+
+**v2.0** (planned)
+
+- Balance Sheet and full working-capital schedule (DSO / DPO, deferred-revenue balance)
+- Capex and fixed-asset schedule, debt schedule and financing
